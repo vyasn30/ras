@@ -1,7 +1,7 @@
 from fastapi import APIRouter 
 from uuid import UUID, uuid4
-from internal.schema.user import User, UserCreate
-from internal.schema.question import Question, QuestionCreate
+from app.internal.schema.user import User, UserCreate
+from app.internal.schema.question import Question, QuestionCreate
 from fastapi.responses import JSONResponse
 
 user_router = APIRouter(prefix="/users")
@@ -11,8 +11,8 @@ users = {}
 async def read_user(user_id: UUID):
     # try:
         payload = {
-        "user_id": user_id,
-        "user_name": users.get(str(user_id).get("name"))
+        "user_id": str(user_id),
+        "user_name": str(users.get(str(user_id)).get("name"))
         } 
 
         return JSONResponse(
