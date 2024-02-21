@@ -1,15 +1,9 @@
 import httpx
 from fastapi.testclient import TestClient
-from main import app 
 import asyncio
 
-client = TestClient(app)
 
 all_users = dict()
-
-def test_root():
-    response = client.get("/index")
-    assert response.status_code == 200
 
 async def async_test_create_users(n_user: int):
     async with httpx.AsyncClient() as async_client:

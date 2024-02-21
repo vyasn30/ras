@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from app.routers.user_router import user_router
-from app.routers.question_router import question_router
+from routers.user_router import user_router
+from routers.question_router import question_router
 
 app = FastAPI()
 app.include_router(user_router)

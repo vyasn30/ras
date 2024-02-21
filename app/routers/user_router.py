@@ -1,7 +1,7 @@
 from fastapi import APIRouter 
 from uuid import UUID, uuid4
-from app.internal.schema.user import User, UserCreate
-from app.internal.schema.question import Question, QuestionCreate
+from internal.schema.user import User, UserCreate
+from internal.schema.question import Question, QuestionCreate
 from fastapi.responses import JSONResponse
 
 user_router = APIRouter(prefix="/users")
