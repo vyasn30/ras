@@ -5,9 +5,8 @@ from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker
 from dotenv import load_dotenv
 
+load_dotenv()
 
-
-DATABASE_URL = os.environ.get("DATABASE_URL") # For docker
 DATABASE_URL = os.environ.get("DATABASE_URL_LOCAL") # For local
 
 engine = create_async_engine(DATABASE_URL, echo=True)

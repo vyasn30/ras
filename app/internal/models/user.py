@@ -10,14 +10,13 @@
 #     user_type = Column(String)
 
 from sqlmodel import SQLModel, Field
-from uuid import UUID
 
 class UserBase(SQLModel):
     user_name: str
     user_type: str
 
 class User(UserBase, table=True):
-    id: UUID = Field(default=None, nullable=False, primary_key=True)
+    id: str = Field(default=None, nullable=False, primary_key=True)
 
 class UserCreate(UserBase):
     pass

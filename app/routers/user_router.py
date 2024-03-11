@@ -5,23 +5,21 @@ from db import get_session
 from internal.models.user import User, UserBase, UserCreate
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlmodel import select
+import json
 
 user_router = APIRouter(prefix="/users")
 users = {}
 
-# @user_router.get("/{user_id}")
-# async def read_user(user_id: UUID):
-#     # try:
-#         payload = {
-#         "user_id": str(user_id),
-#         "user_name": str(users.get(str(user_id)).get("name"))
-#         } 
+@user_router.get("/{user_id}", response_model=UserBase)
+async def read_user(user_id: UUID, session:AsyncSession = Depends(get_session)):
+    # try:
+       
+        statement = select(User).where(User.id == str(user_id))
+        result = await session.execute(statement)
 
-#         return JSONResponse(
-#             status_code=200,
-#             content=payload
-#         )
-
+        fetched_user = result.scalars().first()
+        print(f"User: {fetched_user}")
+        return fetched_user
     # except Exception as e:
     #     return JSONResponse(
     #         status_code=404,
@@ -40,6 +38,7 @@ async def create_user(user: UserCreate, session:AsyncSession = Depends(get_sessi
         session.add(new_user)
         await session.commit()
         await session.refresh(new_user) 
+
         return JSONResponse(
             content={
                 "message": f"User created with id: {str(user_id)}"
